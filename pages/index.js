@@ -25,13 +25,31 @@ const HomePage = (props) => {
   return <MeetupList meetups={props.meetups} />;
 };
 
-export async function getStaticProps() {
+// only runs in server
+// Pre generated for every incoming request
+// Need to be generated for every request
+// When revalidate won't help
+export async function getServerSideProps(context) {
+  const req = context.req;
+  const res = context.res;
+
+  // fetch data from api
+
   return {
-    props: {
-      meetups: DUMMY_MEETUPS,
-    },
-    revalidate: 10,
+    props: { meetups: DUMMY_MEETUPS },
   };
 }
+
+// If you don't need access to the request object use getStaticProps
+// Simply is faster when you don't need every change
+// export async function getStaticProps() {
+//   // fetch data from api
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS,
+//     },
+//     revalidate: 1,
+//   };
+// }
 
 export default HomePage;
