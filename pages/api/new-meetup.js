@@ -6,12 +6,11 @@ import { MongoClient } from "mongodb";
 async function handler(req, res) {
   if (req.method === "POST") {
     const data = req.body;
-    const uri =
-      "mongodb+srv://mongodb.net/meetups?retryWrites=true&w=majority";
+
+    const uri = process.env.DB_URI + "meetups?retryWrites=true&w=majority";
+
+    const client = await MongoClient.connect(uri);
     
-    const client = await MongoClient.connect(
-      uri
-    );
     const db = client.db();
 
     const meetupsCollection = db.collection("meetups");
