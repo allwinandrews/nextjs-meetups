@@ -1,21 +1,31 @@
-import MeetupDetail from "../../components/meetups/MeetupDetail";
+import MeetupDetail from '../../components/meetups/MeetupDetail';
 
-export default function MeetupDetails() {
+function MeetupDetails() {
   return (
     <MeetupDetail
-      image="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/View_to_Sharpitor_from_Meavy.JPG/1280px-View_to_Sharpitor_from_Meavy.JPG"
-      title="A 1st meetup"
-      description="Meetup Description"
-      address="Some street"
+      image='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg'
+      title='First Meetup'
+      address='Some Street 5, Some City'
+      description='This is a first meetup'
     />
   );
 }
 
 export async function getStaticPaths() {
   return {
-    // fallback false only when all the data is loaded
     fallback: false,
-    paths: [{ params: { meetupId: "m1" } }, { params: { meetupId: "m2" } }],
+    paths: [
+      {
+        params: {
+          meetupId: 'm1',
+        },
+      },
+      {
+        params: {
+          meetupId: 'm2',
+        },
+      },
+    ],
   };
 }
 
@@ -24,19 +34,20 @@ export async function getStaticProps(context) {
 
   const meetupId = context.params.meetupId;
 
-  // only executes in developer server, not in browser console
-  //   console.log(meetupId);
+  console.log(meetupId);
 
   return {
     props: {
       meetupData: {
         image:
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/View_to_Sharpitor_from_Meavy.JPG/1280px-View_to_Sharpitor_from_Meavy.JPG",
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg',
         id: meetupId,
-        title: "A 1st meetup",
-        description: "Meetup Description",
-        address: "Some street",
+        title: 'First Meetup',
+        address: 'Some Street 5, Some City',
+        description: 'This is a first meetup',
       },
     },
   };
 }
+
+export default MeetupDetails;
