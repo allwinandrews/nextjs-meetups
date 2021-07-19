@@ -10,7 +10,7 @@ async function handler(req, res) {
     const uri = process.env.DB_URI + "meetups?retryWrites=true&w=majority";
 
     const client = await MongoClient.connect(uri);
-    
+
     const db = client.db();
 
     const meetupsCollection = db.collection("meetups");
